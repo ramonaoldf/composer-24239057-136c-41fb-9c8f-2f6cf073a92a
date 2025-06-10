@@ -17,7 +17,7 @@ class FacebookProvider extends AbstractProvider implements ProviderInterface
      *
      * @var string
      */
-    protected $version = 'v2.2';
+    protected $version = 'v2.3';
 
     /**
      * The scopes being requested.
@@ -93,9 +93,16 @@ class FacebookProvider extends AbstractProvider implements ProviderInterface
      */
     protected function mapUserToObject(array $user)
     {
+        $avatarUrl = $this->graphUrl.'/'.$this->version.'/'.$user['id'].'/picture';
+
+        $firstName = isset($user['first_name']) ? $user['first_name'] : null;
+
+        $lastName = isset($user['last_name']) ? $user['last_name'] : null;
+
         return (new User)->setRaw($user)->map([
-            'id' => $user['id'], 'nickname' => null, 'name' => $user['first_name'].' '.$user['last_name'],
-            'email' => isset($user['email']) ? $user['email'] : null, 'avatar' => $this->graphUrl.'/'.$this->version.'/'.$user['id'].'/picture?type=normal',
+            'id' => $user['id'], 'nickname' => null, 'name' => $firstName.' '.$lastName,
+            'email' => isset($user['email']) ? $user['email'] : null, 'avatar' => $avatarUrl.'?type=normal',
+            'avatar_original' => $avatarUrl.'?width=1920',
         ]);
     }
 
