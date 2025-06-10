@@ -18,7 +18,7 @@ class SocialiteServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-		$this->app->bindShared('Illuminate\Contracts\Auth\Social\Factory', function($app)
+		$this->app->bindShared('Laravel\Socialite\Contracts\Factory', function($app)
 		{
 			return new SocialiteManager($app);
 		});
@@ -31,7 +31,7 @@ class SocialiteServiceProvider extends ServiceProvider {
 	 */
 	public function provides()
 	{
-		return ['Illuminate\Contracts\Auth\Social\Factory'];
+		return ['Laravel\Socialite\Contracts\Factory'];
 	}
 
 }
