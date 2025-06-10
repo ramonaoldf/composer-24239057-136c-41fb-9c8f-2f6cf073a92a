@@ -102,6 +102,8 @@ return Socialite::driver('google')
             ->with(['hd' => 'example.com'])->redirect();
 ```
 
+When using the `with` method, be careful not to pass any reserved keywords such as `state` or `response_type`.
+
 #### Retrieving User Details
 
 Once you have a user instance, you can grab a few more details about the user:
